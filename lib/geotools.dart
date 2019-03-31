@@ -3,6 +3,8 @@
 ///
 library geotools;
 
-export 'src/geotools_base.dart';
-
-
+export 'src/model/node.dart';
+export 'src/model/lat_long.dart';
+export 'src/model/canvas.dart';
+export 'src/model/bounding_box.dart';
+export 'src/model/tile.dart';
