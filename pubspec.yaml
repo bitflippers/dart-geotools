@@ -1,8 +1,13 @@
 name: geotools
+description: A Dart library that provides tools for manipulating and working with geospatial data.
 version: 0.1.0
-description: >-
-  A Dart library that provides tools for manipulating and working with geospatial data.
 author: BitFlippers <BitFlippers.Dev@gmail.com>
 repository: https://github.com/bitflippers/dart-geotools
 environment:
   sdk: ">=2.0.0 <3.0.0"
+
+dev_dependencies:
+  test: ^1.0.0
+
+
+

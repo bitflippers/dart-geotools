@@ -1,21 +1,27 @@
-# dart-geotools
-A Dart library that provides tools for manipulating and working with geospatial data.
+A library for Dart developers.
 
-# TODO
+Created from templates made available by Stagehand under a BSD-style
+[license](https://github.com/dart-lang/stagehand/blob/master/LICENSE).
 
-model/
+## Usage
 
-org.bitflippers.tilerunner.model
+A simple usage example:
 
-pathfinder/
+```dart
+import 'package:untitled/untitled.dart';
 
-org.bitflippers.tilerunner.pathfinder
+main() {
+  var awesome = new Awesome();
+}
+```
 
-util/
+## Features and bugs
 
-geoutils.dart
-jsonserializer.dart
+Please file feature requests and bugs at the [issue tracker][tracker].
 
+<<<<<<< HEAD
+[tracker]: http://example.com/issues/replaceme
+=======
 # References
 
 * https://www.dartlang.org/guides/language/effective-dart
@@ -29,3 +35,4 @@ jsonserializer.dart
 * https://github.com/dart-lang/shelf
 * https://www.dartlang.org/tools/pub/pubspec#version
 * https://www.dartlang.org/guides/language/language-tour
+>>>>>>> f73894ae602c2af8942c8c41c0b647576e5f42d9
