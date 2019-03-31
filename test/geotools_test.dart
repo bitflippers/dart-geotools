@@ -40,7 +40,7 @@ void main() {
     });
     test('asJsonString', () {
       expect(Node.fromDecimalLatLong(1, 2, 3).asJsonString(),
-          equals('{"id":1,"latLong":{"lat":2.0,"long":3.0}}'));
+          equals('{"id":1,"lat":2.0,"long":3.0}'));
     });
     test('addNeighborToNode', () {
       final Node node = Node.fromDecimalLatLong(1, 2, 3);
@@ -141,6 +141,8 @@ void main() {
       final Node node1 = Node.fromDecimalLatLong(1, -5, 0);
       final Node node2 = Node.fromDecimalLatLong(2, 5, 10);
       final Node node3 = Node.fromDecimalLatLong(3, 1, 3);
+      node1.addNeighbor(node2.id);
+      node1.addNeighbor(node3.id);
       final Set<Node> nodes = Set<Node>()..add(node1)..add(node2)..add(node3);
       final Tile tile = Tile()
         ..withNodes(nodes)
@@ -156,8 +158,8 @@ void main() {
       expect(tile.boundingBox.maxlat.decimal, equals(5));
       final Tile tileFromJson = Tile()
         ..withNodesFromJsonString(jsonEncode(nodes.toList()));
-      expect(jsonEncode(nodes.toList()),
-          equals(jsonEncode(tileFromJson.nodes.toList())));
+      expect(
+          tile.nodesAsJsonString(), equals(tileFromJson.nodesAsJsonString()));
     });
   });
 }

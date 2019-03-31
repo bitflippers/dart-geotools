@@ -1,10 +1,16 @@
 import 'package:geotools/geotools.dart';
-import 'dart:convert';
 
 main() {
+  final Node node1 = Node.fromDecimalLatLong(1, -5, 0);
+  final Node node2 = Node.fromDecimalLatLong(2, 5, 10);
+  final Node node3 = Node.fromDecimalLatLong(3, 1, 3);
+  node1.addNeighbor(node2.id);
+  node1.addNeighbor(node3.id);
+  final Set<Node> nodes = Set<Node>()..add(node1)..add(node2)..add(node3);
   final Tile tile = Tile()
-    ..withNodesFromJsonString(
-        '[{"id":1,"latLong":{"lat":2.0,"long":3.0},"neighbours":"[2,3]"},{"id":2,"latLong":{"lat":3.0,"long":3.0}},{"id":3,"latLong":{"lat":1.0,"long":3.0}}]');
+    ..withNodes(nodes)
+    ..withCanvas(768, 1024)
+    ..withBoundingBox(0, 10, -5, 5);
 
-  print(jsonEncode(tile.nodes.toList()));
+  print(tile.nodesAsJsonString());
 }

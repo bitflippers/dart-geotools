@@ -5,8 +5,8 @@ class LatLong {
   final Longitude long;
 
   LatLong.fromDecimal(double pLat, double pLong)
-      : lat = new Latitude.fromDecimal(pLat),
-        long = new Longitude.fromDecimal(pLong);
+      : lat = Latitude.fromDecimal(pLat),
+        long = Longitude.fromDecimal(pLong);
 
   LatLong.fromJson(Map<String, dynamic> json)
       : lat = Latitude.fromDecimal(json['lat']),

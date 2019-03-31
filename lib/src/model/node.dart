@@ -17,16 +17,21 @@ class Node {
 
   Node.fromJson(Map<String, dynamic> json)
       : id = json['id'],
-        latLong = LatLong.fromJson(json['latLong']),
+        latLong = LatLong.fromDecimal(json['lat'], json['long']),
         neighbours = _decodeNeighbours(json);
 
   Map<String, dynamic> toJson() {
     if (neighbours.isEmpty) {
-      return {'id': id, 'latLong': latLong};
+      return {
+        'id': id,
+        'lat': latLong.lat.decimal,
+        'long': latLong.long.decimal
+      };
     } else {
       return {
         'id': id,
-        'latLong': latLong,
+        'lat': latLong.lat.decimal,
+        'long': latLong.long.decimal,
         'neighbours': jsonEncode(this.neighbours.toList()),
       };
     }

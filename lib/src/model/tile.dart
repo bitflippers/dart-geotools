@@ -88,4 +88,8 @@ class Tile {
       }
     }
   }
+
+  String nodesAsJsonString() {
+    return jsonEncode(nodes.toList());
+  }
 }
