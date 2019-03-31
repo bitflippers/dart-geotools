@@ -1,28 +1,23 @@
-A library for Dart developers.
+A Dart library that provides tools for manipulating and working with geospatial data.
 
-Created from templates made available by Stagehand under a BSD-style
-[license](https://github.com/dart-lang/stagehand/blob/master/LICENSE).
+Created by BitFlippers, provided under a MIT
+[license](https://github.com/bitflippers/dart-geotools/blob/master/LICENSE).
 
 ## Usage
 
 A simple usage example:
 
 ```dart
-import 'package:untitled/untitled.dart';
+import 'package:geotools/geotools.dart';
 
 main() {
-  var awesome = new Awesome();
+
+print(latLongAsJson(0,0));
+
 }
 ```
 
-## Features and bugs
-
-Please file feature requests and bugs at the [issue tracker][tracker].
-
-<<<<<<< HEAD
-[tracker]: http://example.com/issues/replaceme
-=======
-# References
+## Inspired By
 
 * https://www.dartlang.org/guides/language/effective-dart
 * https://www.dartlang.org/guides/libraries/create-library-packages
@@ -35,4 +30,9 @@ Please file feature requests and bugs at the [issue tracker][tracker].
 * https://github.com/dart-lang/shelf
 * https://www.dartlang.org/tools/pub/pubspec#version
 * https://www.dartlang.org/guides/language/language-tour
->>>>>>> f73894ae602c2af8942c8c41c0b647576e5f42d9
+
+## Development
+
+* pub get
+* dart --enable-asserts --enable-vm-service:49905 ./example/geotools_example.dart
+* pub run test -r json ./test/geotools_test.dart
