@@ -1,6 +1,6 @@
-/// Support for doing something awesome.
+/// A Dart library that provides tools for manipulating and working with geospatial data.
 ///
-/// More dartdocs go here.
+///
 library geotools;
 
 export 'src/geotools_base.dart';
