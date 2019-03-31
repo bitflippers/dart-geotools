@@ -1,7 +1,5 @@
 import 'package:geotools/geotools.dart';
 
 main() {
-
-print(latLongAsJson(0,0));
-
+  print(nodeAsJsonString(0, 0, 0));
 }

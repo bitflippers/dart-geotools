@@ -1,19 +1,28 @@
+import 'package:geotools/src/model/lat_long.dart';
+
 class Node {
   final int id;
-  final double lat,  lon;
-  final Set<int> neighbours;
+  final LatLong latLong;
+  Set<int> neighbours;
 
-  Node(int pId, double pLat, double pLon, Set<int> pNeighbours): id = pId, lat = pLat, lon = pLon, neighbours = pNeighbours{
-
-    if (pId == null){
-      throw ArgumentError.value(pId, "pId", "must be a bool or a String");
+  Node.fromDecimalLatLong(int pId, double pLat, double pLong)
+      : id = pId,
+        latLong = LatLong.fromDecimal(pLat, pLong) {
+    if (pId == null || pId < 0) {
+      throw ArgumentError.value(pId, "pId", "must be >= 0");
     }
+  }
 
+  Node.fromJson(Map<String, dynamic> json)
+      : id = json['id'],
+        latLong = json['latLong'];
 
-
-
-    }
+  Map<String, dynamic> toJson() => {
+        'id': id,
+        'latLong': latLong,
+      };
 
   bool operator ==(o) => o is Node && id == o.id;
+
   int get hashCode => id.hashCode;
 }
