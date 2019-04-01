@@ -1,4 +1,4 @@
-import 'lat_long.dart';
+import '../geo/lat_long.dart';
 import 'dart:convert';
 
 class Node {
@@ -32,7 +32,7 @@ class Node {
         'id': id,
         'lat': latLong.lat.decimal,
         'long': latLong.long.decimal,
-        'neighbours': jsonEncode(this.neighbours.toList()),
+        'neighbours': _encodeNeighbours()
       };
     }
   }
@@ -58,15 +58,19 @@ class Node {
     return jsonEncode(this);
   }
 
-  static Set<int> _decodeNeighbours(Map<String, dynamic> json) {
+  static Set<int> _decodeNeighbours(final Map<String, dynamic> json) {
     final Set<int> result = Set<int>();
-    final String source = json['neighbours'];
-    if (source != null) {
-      final Set<dynamic> decodeResult = jsonDecode(source).toSet();
-      for (dynamic d in decodeResult) {
-        result.add(d);
+    final List<dynamic> neighbourIds = json['neighbours'];
+    if (neighbourIds != null) {
+      for (dynamic neighbourId in neighbourIds) {
+        result.add(neighbourId);
       }
     }
     return result;
+  }
+
+  String _encodeNeighbours() {
+    // TODO: bug?? returns "[x,z]" instead of [x,z]
+    return jsonEncode(neighbours.toList());
   }
 }

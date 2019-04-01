@@ -14,3 +14,6 @@ doc/api/
 
 .idea/
 dart-geotools.iml
+
+.DS_Store
+

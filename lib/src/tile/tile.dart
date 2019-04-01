@@ -1,6 +1,7 @@
-import 'bounding_box.dart';
+import '../geo/bounding_box.dart';
+import '../geo/geo_utils.dart';
 import 'canvas.dart';
-import 'node.dart';
+import '../graph/node.dart';
 import 'dart:convert';
 
 class Tile {
@@ -38,7 +39,7 @@ class Tile {
     }
     _checkDuplicateLatLong(pNodes);
     _checkNodesInBounds(pNodes);
-    this.nodes = pNodes;
+    nodes = pNodes;
   }
 
   void _checkNodesInBounds(Set<Node> pNodes) {
@@ -74,8 +75,7 @@ class Tile {
     for (Node nodeUnderAnalysis in pNodes) {
       for (Node node in pNodes) {
         if (nodeUnderAnalysis.id != node.id) {
-          if (nodeUnderAnalysis.latLong.lat.decimal ==
-              node.latLong.lat.decimal) {
+          if (GeoUtils.sameLocation(nodeUnderAnalysis.latLong, node.latLong)) {
             throw ArgumentError.value(
                 nodeUnderAnalysis,
                 "nodeUnderAnalysis",

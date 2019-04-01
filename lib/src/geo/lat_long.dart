@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:math';
 
 class LatLong {
   final Latitude lat;
@@ -27,6 +28,10 @@ class Latitude {
       throw ArgumentError.value(pValue, "pValue", "must be >= -90 and <= 90");
     }
   }
+
+  double get radians {
+    return decimal / 180 * pi;
+  }
 }
 
 class Longitude {
@@ -36,5 +41,9 @@ class Longitude {
     if (pValue == null || pValue < -180 || pValue > 180) {
       throw ArgumentError.value(pValue, "pValue", "must be >= -180 and <= 180");
     }
+  }
+
+  double get radians {
+    return decimal / 180 * pi;
   }
 }

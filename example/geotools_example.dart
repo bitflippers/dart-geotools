@@ -1,16 +1,32 @@
 import 'package:geotools/geotools.dart';
+import 'dart:io';
 
 main() {
-  final Node node1 = Node.fromDecimalLatLong(1, -5, 0);
-  final Node node2 = Node.fromDecimalLatLong(2, 5, 10);
-  final Node node3 = Node.fromDecimalLatLong(3, 1, 3);
-  node1.addNeighbor(node2.id);
-  node1.addNeighbor(node3.id);
-  final Set<Node> nodes = Set<Node>()..add(node1)..add(node2)..add(node3);
-  final Tile tile = Tile()
-    ..withNodes(nodes)
-    ..withCanvas(768, 1024)
-    ..withBoundingBox(0, 10, -5, 5);
+  File('test/luxembourg.json').readAsString().then((String contents) {
+    final Tile tile = Tile()..withNodesFromJsonString(contents);
+    print("loaded: " + tile.nodes.length.toString() + " nodes");
 
-  print(tile.nodesAsJsonString());
+    final RandomTrackFinder randomTrackFinder =
+        RandomTrackFinder(10000, tile.nodes);
+
+    print('Searching for random track...');
+
+    final Track track = randomTrackFinder.randomTrack();
+
+    print('Done !');
+
+    print("Track length in meters: " + track.getCost().toString());
+
+    final StringBuffer geoJson = StringBuffer();
+    final List<Node> trackNodes = track.getNodes();
+    geoJson.write('{"type": "LineString","coordinates": [');
+    for (Node node in trackNodes) {
+      geoJson.write('[' +
+          node.latLong.long.decimal.toString() +
+          ',' +
+          node.latLong.lat.decimal.toString() +
+          '],');
+    }
+    print(geoJson.toString().substring(0, geoJson.length - 1) + "]}");
+  });
 }
