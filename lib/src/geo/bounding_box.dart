@@ -19,4 +19,28 @@ class BoundingBox {
           minlong, "pMinlat", "pMinlat must be < pMaxlat");
     }
   }
+
+  String asGeoJson() {
+    return '{"type":"Polygon","coordinates":[[[' +
+        minlong.decimal.toString() +
+        ',' +
+        minlat.decimal.toString() +
+        '],[' +
+        maxlong.decimal.toString() +
+        ',' +
+        minlat.decimal.toString() +
+        '],[' +
+        maxlong.decimal.toString() +
+        ',' +
+        maxlat.decimal.toString() +
+        '],[' +
+        minlong.decimal.toString() +
+        ',' +
+        maxlat.decimal.toString() +
+        '],[' +
+        minlong.decimal.toString() +
+        ',' +
+        minlat.decimal.toString() +
+        ']]]}';
+  }
 }

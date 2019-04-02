@@ -12,3 +12,9 @@ class Canvas {
     }
   }
 }
+
+class CanvasCoordinate {
+  final double x, y;
+
+  CanvasCoordinate(this.x, this.y);
+}

@@ -17,5 +17,9 @@ abstract class NextNodeCandidatesRater {
     if (pCurrentPath == null) {
       throw ArgumentError.value(pCurrentPath, "pCurrentPath", "cannot be null");
     }
+    if (pNextNodeCandidates.isEmpty) {
+      throw ArgumentError.value(pNextNodeCandidates, "pNextNodeCandidates",
+          "no next node candidates !");
+    }
   }
 }

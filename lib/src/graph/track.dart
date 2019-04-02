@@ -44,4 +44,17 @@ class Track {
   List<Node> getNodes() {
     return List<Node>()..addAll(outbound.nodes)..addAll(inbound.nodes);
   }
+
+  String asGeoJson() {
+    final StringBuffer geoJson = StringBuffer();
+    geoJson.write('{"type": "LineString","coordinates": [');
+    for (Node node in getNodes()) {
+      geoJson.write('[' +
+          node.latLong.long.decimal.toString() +
+          ',' +
+          node.latLong.lat.decimal.toString() +
+          '],');
+    }
+    return geoJson.toString().substring(0, geoJson.length - 1) + "]}";
+  }
 }

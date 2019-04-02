@@ -18,6 +18,14 @@ class LatLong {
   String asJsonStringDecimal() {
     return jsonEncode(this);
   }
+
+  String asGeoJson() {
+    return '{"type":"Point", "coordinates":[' +
+        long.decimal.toString() +
+        ',' +
+        lat.decimal.toString() +
+        ']}';
+  }
 }
 
 class Latitude {

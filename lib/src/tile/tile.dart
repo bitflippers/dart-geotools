@@ -2,21 +2,26 @@ import '../geo/bounding_box.dart';
 import '../geo/geo_utils.dart';
 import 'canvas.dart';
 import '../graph/node.dart';
+import '../graph/track.dart';
+import '../graph/random_track_finder.dart';
 import 'dart:convert';
 
 class Tile {
   BoundingBox boundingBox;
   Canvas canvas;
   Set<Node> nodes;
+  Track _track;
+  double _ratioLat;
+  double _ratioLon;
 
   void withCanvas(int pHeight, int pWidth) {
     canvas = Canvas(pHeight, pWidth);
   }
 
-  void withBoundingBox(
-      double pMinlong, double pMaxlong, double pMinlat, double pMaxlat) {
-    boundingBox = BoundingBox.fromDecimal(pMinlong, pMaxlong, pMinlat, pMaxlat);
-    _checkNodesInBounds(nodes);
+  void withBoundingBox(final BoundingBox pBoundingBox) {
+    boundingBox = pBoundingBox;
+    // FIXME
+    //_checkNodesInBounds(nodes);
   }
 
   void withNodesFromJsonString(String pNodesJsonString) {
@@ -38,7 +43,8 @@ class Tile {
           pNodes, "pNodes", "must contain at least one node");
     }
     _checkDuplicateLatLong(pNodes);
-    _checkNodesInBounds(pNodes);
+    // FIXME
+    //_checkNodesInBounds(pNodes);
     nodes = pNodes;
   }
 
@@ -91,5 +97,61 @@ class Tile {
 
   String nodesAsJsonString() {
     return jsonEncode(nodes.toList());
+  }
+
+  generateRandomTrack(final double pTargetTrackDistanceInMeters) {
+    _track =
+        RandomTrackFinder(pTargetTrackDistanceInMeters, nodes).randomTrack();
+  }
+
+  Track getRandomTrack() {
+    if (_track == null) {
+      throw ArgumentError.value(
+          _track, "_track", "track is null ! call generateRandomTrack first !");
+    }
+    return _track;
+  }
+
+  String getTrackAsGeoJson() {
+    if (_track == null) {
+      throw ArgumentError.value(
+          _track, "_track", "track is null ! call generateRandomTrack first !");
+    }
+    return _track.asGeoJson();
+  }
+
+  String getTrackAsSvgPolyline() {
+    if (_track == null) {
+      throw ArgumentError.value(
+          _track, "_track", "track is null ! call generateRandomTrack first !");
+    }
+
+    _ratioLat = canvas.height /
+        (boundingBox.maxlat.decimal - boundingBox.minlat.decimal);
+    _ratioLon = canvas.width /
+        (boundingBox.maxlong.decimal - boundingBox.minlong.decimal);
+
+    final StringBuffer stringBuffer = StringBuffer();
+    stringBuffer.write('<polyline points="');
+    for (Node node in _track.getNodes()) {
+      final CanvasCoordinate canvasCoordinate = _getCanvasCoordinate(node);
+      stringBuffer.write(canvasCoordinate.x.toString() +
+          "," +
+          canvasCoordinate.y.toString() +
+          " ");
+    }
+    stringBuffer.write('" style="fill:none;stroke:blue;stroke-width:3" />');
+    return stringBuffer.toString();
+  }
+
+  CanvasCoordinate _getCanvasCoordinate(final Node pNode) {
+    final double lat = pNode.latLong.lat.decimal;
+    final double lon = pNode.latLong.long.decimal;
+
+    final double x = (lon - boundingBox.minlong.decimal) * _ratioLon;
+    final double y =
+        canvas.height - ((lat - boundingBox.minlat.decimal) * _ratioLat);
+
+    return CanvasCoordinate(x, y);
   }
 }

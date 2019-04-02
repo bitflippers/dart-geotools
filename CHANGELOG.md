@@ -1,3 +1,7 @@
+## 0.3.0
+
+- First version of track generation
+
 ## 0.2.0
 
 - Defined model and first functionalities
