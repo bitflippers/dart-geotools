@@ -57,6 +57,7 @@ class PathFinder {
   }
 
   Path path() {
+    _path.initialNode(initialNode);
     Node currentNode = initialNode;
     bool pathCompleted = pathCompletedEvaluator.isCompleted(_path);
     do {

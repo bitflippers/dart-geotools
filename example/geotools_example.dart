@@ -63,7 +63,7 @@ main() {
     final Tile tile = Tile()
       ..withNodesFromJsonString(contents)
       ..withBoundingBox(luxembourg)
-      ..withCanvas(1127, 1206);
+      ..withCanvas(1129, 1207);
     final double targetTrackDistanceInMeters = 5000;
     tile.generateRandomTrack(targetTrackDistanceInMeters);
     final double trackLengthInMeters = tile.getRandomTrack().getCost();

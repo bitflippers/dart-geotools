@@ -20,8 +20,7 @@ class Tile {
 
   void withBoundingBox(final BoundingBox pBoundingBox) {
     boundingBox = pBoundingBox;
-    // FIXME
-    //_checkNodesInBounds(nodes);
+    _checkNodesInBounds(nodes);
   }
 
   void withNodesFromJsonString(String pNodesJsonString) {
@@ -43,8 +42,7 @@ class Tile {
           pNodes, "pNodes", "must contain at least one node");
     }
     _checkDuplicateLatLong(pNodes);
-    // FIXME
-    //_checkNodesInBounds(pNodes);
+    _checkNodesInBounds(pNodes);
     nodes = pNodes;
   }
 

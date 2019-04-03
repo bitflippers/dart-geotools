@@ -29,12 +29,11 @@ class Track {
           "first outbound node is not the same location as last inbound node");
     }
 
-    // FIXME
-//    if (!GeoUtils.sameLocation(
-//        lastOutboundNode.latLong, firstInboundNode.latLong)) {
-//      throw ArgumentError.value(pOutbound, "pOutbound",
-//          "last outbound node is not the same location as first inbound node");
-//    }
+    if (!GeoUtils.sameLocation(
+        lastOutboundNode.latLong, firstInboundNode.latLong)) {
+      throw ArgumentError.value(pOutbound, "pOutbound",
+          "last outbound node is not the same location as first inbound node");
+    }
   }
 
   double getCost() {

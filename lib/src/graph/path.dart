@@ -19,4 +19,11 @@ class Path {
     nodes.add(pNode);
     totalCost += pCostIncrement;
   }
+
+  initialNode(final Node pNode) {
+    if (pNode == null) {
+      throw ArgumentError.value(pNode, "pNode", "cannot be null");
+    }
+    nodes.add(pNode);
+  }
 }
