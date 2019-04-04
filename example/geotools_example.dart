@@ -50,10 +50,10 @@ main() {
   // Canvas stuff
 
   luxembourg.readAsString().then((String contents) {
-    final Latitude luxembourgMaxLatitude = Latitude.fromDecimal(49.6168);
-    final Latitude luxembourgMinLatitude = Latitude.fromDecimal(49.6065);
-    final Longitude luxembourgMaxLongitude = Longitude.fromDecimal(6.1377);
-    final Longitude luxembourgMinLongitude = Longitude.fromDecimal(6.1207);
+    final Latitude luxembourgMaxLatitude = Latitude.fromDecimal(49.61515);
+    final Latitude luxembourgMinLatitude = Latitude.fromDecimal(49.60804);
+    final Longitude luxembourgMaxLongitude = Longitude.fromDecimal(6.13790);
+    final Longitude luxembourgMinLongitude = Longitude.fromDecimal(6.12092);
     final BoundingBox luxembourg = BoundingBox.fromDecimal(
         luxembourgMinLongitude.decimal,
         luxembourgMaxLongitude.decimal,
@@ -63,8 +63,8 @@ main() {
     final Tile tile = Tile()
       ..withNodesFromJsonString(contents)
       ..withBoundingBox(luxembourg)
-      ..withCanvas(1129, 1207);
-    final double targetTrackDistanceInMeters = 5000;
+      ..withCanvas(4095, 6275);
+    final double targetTrackDistanceInMeters = 1000;
     tile.generateRandomTrack(targetTrackDistanceInMeters);
     final double trackLengthInMeters = tile.getRandomTrack().getCost();
     print("Track length in meters: " + trackLengthInMeters.toString());
